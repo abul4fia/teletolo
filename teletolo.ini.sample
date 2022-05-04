@@ -1,0 +1,36 @@
+# you can get telegram development credentials in telegram API Development Tools
+# Fill in and uncomment the two following lines
+
+# api_id = YOUR_TELEGRAM_API_ID
+# api_hash = YOUR_TELEGRAM_API_HASH
+
+# use full phone number including + and country code
+# Fill in and uncomment the two following lines
+
+# phone = YOUR_PHONE
+# username = YOUR_TELEGRAM_USERNAME
+
+# Id of the channel (can be private, see the README for a method to
+# get the channel id, or use "me" for the "Saved messages" chat
+channel_id = me
+
+# Max number of messages to retrieve
+msg_limit = 100
+
+# Folders for logseq
+journal_folder = ./journals
+assets_folder = ./assets
+
+# Format of the journal dates
+# See https://arrow.readthedocs.io/en/latest/#supported-tokens
+journal_date_fmt = YYYY-MM-DD dddd
+time_fmt = HH:mm
+
+# Format of the resulting messages
+tags = [[inbox]]
+block_fmt = **{time}** {tags} {message}
+date_header_fmt = ## {date}
+
+# Change these to yes if you are satisfied with the results of your preliminar tests
+append_to_journal = no
+delete_after_download = no
