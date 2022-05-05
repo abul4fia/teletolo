@@ -142,7 +142,7 @@ class MessagesProcessor:
     def get_gps_info(self, msg):
         lat = msg.media.geo.lat
         long = msg.media.geo.long
-        mdown = ( 'Localización GPS:\n'
+        mdown = ( 'GPS location:\n'
             '[:div {:style {:margin "0 auto" :width 400 }} '
             '[:iframe {:src '
             f'"https://maps.google.com/maps?q={lat},{long}&hl=es&z=14&output=embed"'
@@ -284,7 +284,6 @@ def main(ctx, api_id, api_hash, phone, username, channel_id, msg_limit, days_bac
     else:
         print("kept in the Telegram channel")
     print()
-    # Conectar con la API de telegram
     if dry:
         print("DRY MODE. No action performed")
         return
