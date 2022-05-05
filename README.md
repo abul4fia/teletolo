@@ -12,8 +12,8 @@ It can also write directly in the appropriate journal pages, based on the timest
 ## Features
 
 * It can detect and automatically format some usual types of messages, such as:
-  * **Images:** PNG, JPG, GIF (they are stored in the assets folder and inserted in the journal using `![](assets/file)` syntax).
-  * **Audio:** ogg (they are stored in the assets folder and inserted in the journal using `![](assets/file)` syntax, which causes logseq to render an audio player with controls. Note that ogg audio format is not supported in iOS devices)
+  * **Images:** PNG, JPG, GIF (they are stored in the assets folder and inserted in the journal using `![](file)` syntax).
+  * **Audio:** ogg (they are stored in the assets folder and inserted in the journal using `![](file)` syntax, which causes logseq to render an audio player with controls. Note that ogg audio format is not supported in iOS devices)
   * **Links:** if the link is to youtube or twitter, an appropriate embed is generated in the journal. If it is to a any other page, the title and excerpt of the page are retrieved and inserted in the journal.
   * **GPS location**. A bit of _hiccup_ code is inserted in the journal, to show the location in an embedded google map.
   * **Plain text**. The text is simply inserted in the journal. Of course you can include any tag or wikilink you want. The text is copied as is in the journal, and later interpreted by logseq appropriately.
