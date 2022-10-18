@@ -4,6 +4,7 @@ from collections import defaultdict
 from pathlib import Path
 from dataclasses import dataclass
 import sys
+import re
 
 import arrow
 from telethon import TelegramClient
@@ -189,6 +190,7 @@ class MessagesProcessor:
 
     def format_block_as_markdown(self, day, ts, note, had_header=False):
         time = ts.format(self.cfg.time_fmt)
+        note = re.sub(r"^(\s*)- ", r"\1*", note, flags=re.MULTILINE).rstrip()
         block = self.cfg.block_fmt.format(date=day, tags=self.cfg.tags, time=time, message=note)
         prefix = ""
         if had_header:
