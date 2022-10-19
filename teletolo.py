@@ -102,6 +102,7 @@ class MessagesProcessor:
     def __init__(self, cfg:Config, conn:TelegramConnector):
         self.cfg:Config = cfg
         self.conn = conn
+        self.downloaded_assets = {}
         if self.cfg.append_to_journal:
             self.assets = "assets/"
         else:
@@ -114,9 +115,19 @@ class MessagesProcessor:
         if isinstance(msg.media, _tl.MessageMediaDocument):
             return msg.file.mime_type
 
+    def get_asset_name(self, ts, kind, ext):
+        t = int(ts.timestamp())
+        k = f"{self.assets}{kind}_{t}.{ext}"
+        if k in self.downloaded_assets:
+            n = self.downloaded_assets[k] + 1
+        else:
+            n = 0
+        self.downloaded_assets[k] = n
+        return f"{self.assets}{kind}_{t}_{n}.{ext}"
+
     async def download_media(self, msg, ts, kind, ext):
         message = msg.message
-        fname = f"{self.assets}{kind}_{ts.timestamp()}.{ext}"
+        fname = self.get_asset_name(ts, kind, ext)
         f = await self.conn.client.download_media(msg.media, fname)
         print(f"{kind.title()} downloaded in {f}")
         if message:
@@ -190,7 +201,7 @@ class MessagesProcessor:
 
     def format_block_as_markdown(self, day, ts, note, had_header=False):
         time = ts.format(self.cfg.time_fmt)
-        note = re.sub(r"^(\s*)- ", r"\1*", note, flags=re.MULTILINE).rstrip()
+        note = re.sub(r"^(\s*)- ", r"\1* ", note, flags=re.MULTILINE).rstrip()
         block = self.cfg.block_fmt.format(date=day, tags=self.cfg.tags, time=time, message=note)
         prefix = ""
         if had_header:
